@@ -5,8 +5,8 @@ import time
 
 # Trading Coin List
 coinlist = ["KRW-BTC", "KRW-ETH", "KRW-ETC", "KRW-QTUM", "KRW-XRP", "KRW-XTZ"]
-lower28 = []
-higher70 = []
+lower28 = [False, False, False, False, False, False]
+higher70 = [True, True, True, True, True, True]
 
 # RSI Calculater
 def rsi(ohlc: pandas.DataFrame, period: int = 14):
@@ -56,7 +56,7 @@ upbit = pyupbit.Upbit(access, secret)
 
 # Auto Trade Code
 while True:
-    for i in range(len(coinlist)):
+    for i in range(0, len(coinlist), 1):
         data = pyupbit.get_ohlcv(ticker=coinlist[i], interval="minute3")
         now_rsi = rsi(data, 14).iloc[-1]
         # RSI -> HIGH = UPS, RSI -> LOW = DOWNS
